@@ -17,21 +17,29 @@ Claude Code のユーザースキル集。各スキルはリポジトリ直下�
 .
 ├── <skill-name>/
 │   └── SKILL.md    スキル本体。YAML frontmatter (name, description) と規約本文からなる
-└── _tools/         インストールスクリプト。先頭が `_` のディレクトリはスキルとして扱われない
+└── _tools/         インストールスクリプト (install.sh, install.ps1)。先頭が `_` のディレクトリはスキルとして扱われない
 ```
 
 ## インストール
+
+Linux, macOS, WSL では次のスクリプトを実行する。
 
 ```sh
 ./_tools/install.sh
 ```
 
-リポジトリ直下の全スキルが `~/.claude/skills/` へ symlink される。オプションおよび個別スキルの指定方法は [_tools/README.md](_tools/README.md) を参照。
+Windows では次のスクリプトを実行する。
+
+```powershell
+.\_tools\install.ps1
+```
+
+リポジトリ直下の全スキルが、ユーザースキルディレクトリ (`~/.claude/skills/`) へリンクされる。オプション、個別スキルの指定方法、Windows での実行ポリシーの扱いは、[_tools/README.md](_tools/README.md) を参照。
 
 ## スキルの追加
 
 1. リポジトリ直下にスキル名のディレクトリを作成する。
 2. その中に `SKILL.md` を配置する。frontmatter の `name` にはディレクトリ名と同じ値を、`description` にはスキルの対象と使用する作業を記述する。Claude はこの `description` によって起動を判断する。
-3. `./_tools/install.sh` を実行する。
+3. インストールスクリプトを実行する。
 
-symlink でインストールされているため、既存スキルの `SKILL.md` を編集した場合は再インストール不要。
+リンクでインストールされているため、既存スキルの `SKILL.md` を編集した場合は再インストール不要。
