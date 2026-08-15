@@ -8,6 +8,8 @@ Claude Code のユーザースキル集。各スキルはリポジトリ直下�
 | --- | --- |
 | [code-comment-edit](code-comment-edit/SKILL.md) | ソースコード中のコメントの書式と記述内容の規約 |
 | [document-markdown-edit](document-markdown-edit/SKILL.md) | Markdown ドキュメントの書式、ファイル分割方針、文章の規約 |
+| [ja-techdoc-format](ja-techdoc-format/SKILL.md) | 日本語の技術文書の文体、語り手、見出し、図表の導入、参照、補足ブロックの規約 |
+| [ja-writing](ja-writing/SKILL.md) | 日本語の用語選択の規約。分かりにくい訳語への言い換えを避ける |
 
 ## リポジトリ構成
 
