@@ -1,6 +1,6 @@
 # skills
 
-Claude Code のユーザースキル集。各スキルはリポジトリ直下のディレクトリとして格納され、`~/.claude/skills/` へインストールして使用する。
+Claude Code と Codex で共用できるユーザースキル集。各スキルはリポジトリ直下のディレクトリとして格納する。
 
 ## 収録スキル
 
@@ -16,30 +16,38 @@ Claude Code のユーザースキル集。各スキルはリポジトリ直下�
 ```
 .
 ├── <skill-name>/
-│   └── SKILL.md    スキル本体。YAML frontmatter (name, description) と規約本文からなる
-└── _tools/         インストールスクリプト (install.sh, install.ps1)。先頭が `_` のディレクトリはスキルとして扱われない
+│   └── SKILL.md          スキル本体。YAML frontmatter (name, description) と規約本文からなる
+└── _tools/
+    ├── install-npx.*     npx skills を使うインストールスクリプト
+    └── install.*         ローカルリポジトリからリンクまたはコピーする従来のスクリプト
 ```
 
-## インストール
+## `npx skills` でインストール
+
+Node.js 22.20.0 以降と Git が必要である。
 
 Linux, macOS, WSL では次のスクリプトを実行する。
 
 ```sh
-./_tools/install.sh
+./_tools/install-npx.sh
 ```
 
 Windows では次のスクリプトを実行する。
 
 ```powershell
-.\_tools\install.ps1
+.\_tools\install-npx.ps1
 ```
 
-リポジトリ直下の全スキルが、ユーザースキルディレクトリ (`~/.claude/skills/`) へリンクされる。オプション、個別スキルの指定方法、Windows での実行ポリシーの扱いは、[_tools/README.md](_tools/README.md) を参照。
+引数を省略すると、リポジトリ内の全スキルを Claude Code と Codex のユーザーディレクトリへインストールする。個別スキルや別のエージェントを指定する方法は、[_tools/README.md](_tools/README.md) を参照。
+
+## ローカルリポジトリからインストール
+
+従来のスクリプトも引き続き利用できる。Linux, macOS, WSL では `./_tools/install.sh`、Windows では `.\_tools\install.ps1` を実行する。
+
+リポジトリ直下の全スキルが、Claude Code のユーザースキルディレクトリ (`~/.claude/skills/`) へリンクされる。リポジトリ側の編集を即座に反映したい場合や、任意のディレクトリへコピーしたい場合に使用する。オプションは [_tools/README.md](_tools/README.md) を参照。
 
 ## スキルの追加
 
 1. リポジトリ直下にスキル名のディレクトリを作成する。
-2. その中に `SKILL.md` を配置する。frontmatter の `name` にはディレクトリ名と同じ値を、`description` にはスキルの対象と使用する作業を記述する。Claude はこの `description` によって起動を判断する。
-3. インストールスクリプトを実行する。
-
-リンクでインストールされているため、既存スキルの `SKILL.md` を編集した場合は再インストール不要。
+2. その中に `SKILL.md` を配置する。frontmatter の `name` にはディレクトリ名と同じ値を、`description` にはスキルの対象と使用する作業を記述する。エージェントはこの `description` によって起動を判断する。
+3. `npx skills` 方式では変更を公開した後にインストールスクリプトを再実行する。従来のリンク方式では再インストールは不要である。
